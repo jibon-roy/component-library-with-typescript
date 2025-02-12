@@ -94,7 +94,7 @@ const Heading: React.FC<HeaderProps> = ({
   const Tag: React.ElementType = `h${finalLevel}`;
 
   return (
-    <header className={clsx("py-4 px-6", center && "text-center")}>
+    <header className={clsx(center && "text-center")}>
       <Tag className={clsx(textSize, textColor, className)} {...rest}>
         {children}
       </Tag>
