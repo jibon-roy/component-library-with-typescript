@@ -84,11 +84,11 @@ const Heading: React.FC<HeaderProps> = ({
     : (level as typeof level);
 
   const textSize = {
-    1: "text-[75px] font-bold",
+    1: "text-[75px] font-semibold",
     2: "text-[46px] font-semibold",
-    3: "text-[28px] font-medium",
-    4: "text-[17px] font-normal",
-    5: "text-[10px] font-light",
+    3: "text-[28px] font-semibold",
+    4: "text-[17px] font-semibold",
+    5: "text-[10px] font-semibold",
   }[finalLevel];
 
   const Tag: React.ElementType = `h${finalLevel}`;
