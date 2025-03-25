@@ -11,7 +11,6 @@ type TContextProvider = {
 };
 
 export const ContextProvider = createContext<TContextProvider | null>(null);
-
 const MyContextProvider = ({ children }: {children: ReactNode}) => {
   const [windowWidth, setWindowWidth] = useState<number | null>(null);
 
