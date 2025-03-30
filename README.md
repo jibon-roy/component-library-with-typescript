@@ -130,3 +130,20 @@ const [description, setDescription] = useState<string | undefined>("");
             />
 </Form.Item>
 ```
+
+# Dynamic meta data
+
+```bash
+
+export const metadata: Metadata = {
+  title: {
+    default: "Mach Makers",
+    template: "%s |  Mach Makers",
+  },
+  description: "Hire the Best. Get Hired by the Best",
+};
+
+export const metadata: Metadata = {
+  title: "Services",
+};
+```
