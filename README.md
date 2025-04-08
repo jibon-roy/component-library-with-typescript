@@ -204,3 +204,15 @@ QuillEditor.displayName = 'QuillEditor';
 
 export default QuillEditor;
 ```
+
+## Quil editor use
+
+```bash
+<Form.Item name="experience" label="Experience">
+<QuillEditor
+value={form.getFieldValue("experience")}
+onChange={(content) => form.setFieldsValue({ experience: content })}
+placeholder="Write here your experience"
+/>
+</Form.Item>
+```
