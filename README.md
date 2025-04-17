@@ -42,7 +42,6 @@ const MyContextProvider = ({ children }: {children: ReactNode}) => {
 export default MyContextProvider;
 ```
 
-
 ## Dynamic heading:
 ```bash
 "use client";
