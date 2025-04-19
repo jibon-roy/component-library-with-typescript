@@ -146,7 +146,10 @@ export const metadata: Metadata = {
 };
 ```
 
-# Quil Editor Setup
+# Quil Editor Setup 
+
+### Install React Quill Editor
+`npm i react-quill-new`
 
 ```bash
 import React, { forwardRef } from 'react';
