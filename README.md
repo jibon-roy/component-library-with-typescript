@@ -1,6 +1,6 @@
 # Component-library-with-typescript
 
-## Shortcut list:
+### Shortcut list:
 [Translator](#translator)
 
 ## Window width context provider:
@@ -214,18 +214,18 @@ export default QuillEditor;
 ## Quil editor use
 
 ```bash
-<Form.Item name="experience" label="Experience">
+<form>
 <QuillEditor
 value={form.getFieldValue("experience")}
 onChange={(content) => form.setFieldsValue({ experience: content })}
 placeholder="Write here your experience"
 />
-</Form.Item>
+</form>
 ```
 
 <div id="translator">
-## Next Translator Provider
 
+## Next Translator Provider
 ### Provider
 ```bash
 /* eslint-disable @typescript-eslint/no-explicit-any */
