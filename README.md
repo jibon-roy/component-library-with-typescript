@@ -1,7 +1,10 @@
 # Component-library-with-typescript
 
 ### Shortcut list:
-[Translator](#translator)
+1. [Window Size Provider](#window-size)
+2. [Translator](#translator)
+
+<div id=""window-size">
 
 ## Window width context provider:
 ```bash
@@ -44,7 +47,10 @@ const MyContextProvider = ({ children }: {children: ReactNode}) => {
 export default MyContextProvider;
 ```
 
+</div>
+
 ## Dynamic heading:
+
 ```bash
 "use client";
 
