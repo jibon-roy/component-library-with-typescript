@@ -3,8 +3,8 @@
 ### Shortcut list:
 1. [Window Width Provider](#window-width)
 2. [Dynamic Heading](#dynamic-heading)
-3. 
-4. [Joditor](#jod-editor)
+3. [Next js Dynamic Title (Meta Data)](#dynamic-heading-next)
+4. [Jod editor](#jod-editor)
 5. [Translator](#translator)
 
 <div id="window-width">
@@ -119,6 +119,26 @@ export default Heading;
 ```
 </div>
 
+<div id="dynamic-heading-next">
+  
+# Dynamic meta data for Next.js
+
+```bash
+
+export const metadata: Metadata = {
+  title: {
+    default: "Mach Makers",
+    template: "%s |  Mach Makers",
+  },
+  description: "Hire the Best. Get Hired by the Best",
+};
+
+export const metadata: Metadata = {
+  title: "Services",
+};
+```
+</div>
+
 <div id="jod-editor">
 
 ## Jodeditor 
@@ -148,24 +168,9 @@ const [description, setDescription] = useState<string | undefined>("");
 ```
 </div>
 
-# Dynamic meta data
+<div id="quil-editor">
 
-```bash
-
-export const metadata: Metadata = {
-  title: {
-    default: "Mach Makers",
-    template: "%s |  Mach Makers",
-  },
-  description: "Hire the Best. Get Hired by the Best",
-};
-
-export const metadata: Metadata = {
-  title: "Services",
-};
-```
-
-# Quil Editor Setup 
+## Quil Editor Setup 
 
 ### Install React Quill Editor
 ```bash
@@ -238,6 +243,8 @@ placeholder="Write here your experience"
 />
 </form>
 ```
+
+</div>
 
 <div id="translator">
 
