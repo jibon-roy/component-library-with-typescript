@@ -1,12 +1,16 @@
 # Component-library-with-typescript
 
 ### Shortcut list:
-1. [Window Size Provider](#window-size)
-2. [Translator](#translator)
+1. [Window Width Provider](#window-width)
+2. [Dynamic Heading](#dynamic-heading)
+3. 
+4. [Joditor](#jod-editor)
+5. [Translator](#translator)
 
-<div id=""window-size">
+<div id="window-width">
 
-## Window width context provider:
+## 1. Window width context provider:
+
 ```bash
 "use client";
 import { createContext, useEffect, useState, ReactNode } from "react";
@@ -49,7 +53,9 @@ export default MyContextProvider;
 
 </div>
 
-## Dynamic heading:
+<div id="dynamic-heading">
+  
+## 2. Dynamic heading:
 
 ```bash
 "use client";
@@ -111,6 +117,9 @@ const Heading: React.FC<HeaderProps> = ({
 
 export default Heading;
 ```
+</div>
+
+<div id="jod-editor">
 
 ## Jodeditor 
 
@@ -137,6 +146,7 @@ const [description, setDescription] = useState<string | undefined>("");
             />
 </Form.Item>
 ```
+</div>
 
 # Dynamic meta data
 
