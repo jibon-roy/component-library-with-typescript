@@ -152,18 +152,18 @@ import JoditEditor from "jodit-react";
 const [description, setDescription] = useState<string | undefined>("");
 
 <Form.Item
-            label={<div className="text-gray-600 font-medium">Description</div>}
-            rules={[{ required: true, message: "Please enter a description" }]}
-          >
-            <JoditEditor
-              value={description}
-              onBlur={(newContent) => setDescription(newContent)}
-              config={{
-                readonly: false,
-                placeholder: "Start writing...",
-                height: 400,
-              }}
-            />
+  label={<div className="text-gray-600 font-medium">Description</div>}
+  rules={[{ required: true, message: "Please enter a description" }]}
+>
+  <JoditEditor
+    value={description}
+    onBlur={(newContent) => setDescription(newContent)}
+    config={{
+    readonly: false,
+    placeholder: "Start writing...",
+    height: 400,
+    }}
+  />
 </Form.Item>
 ```
 </div>
