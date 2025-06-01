@@ -6,6 +6,9 @@
 3. [Next js Dynamic Title (Meta Data)](#dynamic-heading-next)
 4. [Jod editor](#jod-editor)
 5. [Translator](#translator)
+6. [Custom Buttom](#custom-button)
+7. [Custom Input](#custom-input)
+8. [Custom Select](#custom-select)
 
 <div id="window-width">
 
@@ -417,5 +420,242 @@ body .skiptranslate {
 
 ```
   
+</div>
+
+<div id="custom-button">
+
+### Custom Button
+
+```bash
+"use client";
+
+import type React from "react";
+
+interface MyButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}
+
+export const Button: React.FC<MyButtonProps> = ({
+  children,
+  onClick,
+  variant = "primary",
+  size = "md",
+  className = "",
+}) => {
+  // Define base styles
+  const baseStyles =
+    "rounded-md cursor-pointer font-medium transition-all duration-200 flex items-center justify-center";
+
+  // Define variant styles
+  const variantStyles = {
+    primary:
+      "bg-accent text-white px-6 py-3 rounded-md font-semibold hover:bg-accent-light",
+    secondary: "bg-gray-800 text-white hover:bg-gray-900",
+    outline:
+      "border-2 border-gray-300 text-secondary-text hover:bg-secondary font-semibold hover:text-secondary-text-light",
+  };
+
+  // Define size styles
+  const sizeStyles = {
+    sm: "text-xs px-3 py-1",
+    md: "text-sm px-4 py-2",
+    lg: "text-base px-6 py-3",
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+    >
+      {children}
+    </button>
+  );
+};
+
+```
+
+</div>
+
+<div id="custom-input">
+
+### Custom Input
+
+```bash
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+// Define input variants
+const inputVariants = cva(
+  `flex w-full rounded-md border-0 bg-secondary px-3 py-3 text-sm 
+   ring-offset-background file:border-0 file:bg-transparent file:text-sm 
+   file:font-medium placeholder:text-muted-foreground focus-visible:outline-none 
+   focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50`,
+  {
+    variants: {
+      variant: {
+        default: "",
+        ghost: "bg-transparent border-none shadow-none",
+        underline: "border-b rounded-none bg-transparent px-0",
+      },
+      inputSize: {
+        sm: "h-8 px-2 text-sm",
+        md: "h-10 px-3 text-base",
+        lg: "h-12 px-4 text-lg",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      inputSize: "lg",
+    },
+  }
+);
+
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+    VariantProps<typeof inputVariants> {
+  label?: string;
+  error?: string;
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    { className, type = "text", label, error, variant, inputSize, ...props },
+    ref
+  ) => {
+    return (
+      <div className="w-full">
+        {label && (
+          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            {label}
+          </label>
+        )}
+        <input
+          type={type}
+          className={cn(
+            inputVariants({ variant, inputSize }),
+            error && "border-red-500 focus-visible:ring-red-500",
+            className
+          )}
+          ref={ref}
+          {...props}
+        />
+        {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+      </div>
+    );
+  }
+);
+
+Input.displayName = "Input";
+
+export { Input, inputVariants };
+
+```
+
+</div>
+
+<div id="custom-select">
+
+### Custom Select
+
+```bash
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Check } from 'lucide-react';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+type CustomSelectProps = {
+  options: Option[];
+  placeholder?: string;
+  label?: string;
+  onChange?: (value: string) => void;
+  defaultValue?: string;
+};
+
+export default function CustomSelect({
+  options,
+  placeholder = 'Select...',
+  label,
+  onChange,
+  defaultValue,
+}: CustomSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<Option | null>(
+    () => options.find((o) => o.value === defaultValue) ?? null
+  );
+
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const handleSelect = (option: Option) => {
+    setSelected(option);
+    setIsOpen(false);
+    onChange?.(option.value);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="w-full max-w-sm space-y-2" ref={selectRef}>
+      {label && <label className="text-sm font-medium text-muted-foreground">{label}</label>}
+
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        <span>{selected?.label ?? placeholder}</span>
+        <ChevronDown className="w-4 h-4 opacity-60" />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 mt-2 w-full max-w-sm rounded-md border bg-white shadow-xl"
+          >
+            {options?.length > 0 ? (
+              options.map((option) => (
+                <li
+                  key={option.value}
+                  onClick={() => handleSelect(option)}
+                  className="flex cursor-pointer items-center justify-between px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+                >
+                  {option.label}
+                  {selected?.value === option.value && <Check className="w-4 h-4 text-green-500" />}
+                </li>
+              ))
+            ) : (
+              <li className="px-3 py-2 text-sm text-muted-foreground">No options available</li>
+            )}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+```
+
 </div>
 
