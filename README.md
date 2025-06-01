@@ -424,7 +424,7 @@ body .skiptranslate {
 
 <div id="custom-button">
 
-### Custom Button
+## Custom Button
 
 ```bash
 "use client";
@@ -482,7 +482,7 @@ export const Button: React.FC<MyButtonProps> = ({
 
 <div id="custom-input">
 
-### Custom Input
+## Custom Input
 
 ```bash
 import * as React from "react";
@@ -560,7 +560,7 @@ export { Input, inputVariants };
 
 <div id="custom-select">
 
-### Custom Select
+## Custom Select
 
 ```bash
 'use client';
